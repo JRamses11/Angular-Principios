@@ -1,4 +1,6 @@
 import { Component, signal } from "@angular/core";
+import { PersonajeListComponent } from "../../components/dragonball/personaje-list";
+import { DragonballPersonajeAddComponent } from "../../components/dragonball/dragonball-personaje-add";
 
 interface Personaje {
     id: number;
@@ -8,6 +10,7 @@ interface Personaje {
 
 @Component({
     templateUrl: './dragonball-super.html',
+    imports: [PersonajeListComponent, DragonballPersonajeAddComponent],
 })
 
 
@@ -20,26 +23,6 @@ export class dragonballSuperPageComponent {
         { id: 1, nombre: 'Goku', poder: 9001 },
         { id: 2, nombre: 'Vegeta', poder: 8000 },
     ]);
-
-    addPersonaje() {
-        if((this.nombre() === '') || (this.poder() <= 0)){
-            return;
-        }
-        
-        const nuevoPersonaje: Personaje = {
-            id: this.personajes().length + 1,
-            nombre: this.nombre(),
-            poder: this.poder(),
-        };
-        this.personajes.update(personajes => [...personajes, nuevoPersonaje]);
-        this.Limpiar();
-        console.log(this.nombre(), this.poder());
-    }
-
-    Limpiar() {
-        this.nombre.set('');
-        this.poder.set(0);
-    }
 
 }
 

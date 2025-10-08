@@ -4,42 +4,12 @@
 
 <section class="row">
     <div class="col-12 col-sm-6">
-        <h3>Agregar  {{nombre()}}</h3>
-        <input type="text" 
-        class="form-control" 
-        placeholder="Nombre del personaje"
-        [value]="nombre()"
-        (input)="nombre.set(txtNombre.value)"
-        #txtNombre
-        >
-        <input 
-        type="number" 
-        class="form-control mt-2" 
-        placeholder="Poder del personaje"
-        [value]="poder()"
-        (input)="poder.set(txtPoder.valueAsNumber)"
-        #txtPoder
-        >
-        <button (click)="addPersonaje()" class="mt-2 btn btn-primary">Agregar</button>
+        <dragonball-personaje-add></dragonball-personaje-add>
     </div>
 
     <div class="col-12 col-sm-6">
-        <h3>Listado</h3>
-        <ul class="list-group">
-            @for (personaje of personajes(); track personaje.id; let idx=$index) {
-
-                @if(personaje.poder >500){
-                     <li class="list-group-item d-flex justify-content-between">
-                     <span>{{idx + 1}} - {{personaje.nombre}}</span>
-                     <strong
-                     [class.text-danger]="personaje.poder>9000"
-                     [class.text-warning]="personaje.poder<=9000 && personaje.poder>=7000"
-                    >{{personaje.poder}}</strong>
-                </li>
-                } @else {
-                    <li class="list-group-item d-flex justify-content-between"><strong>Aqui no hay nada</strong></li>
-                }
-            }
-        </ul>
+        <dragonball-personaje-list 
+        listName="Personajes fuertes"
+        [personajes]="personajes()"></dragonball-personaje-list>
     </div>
 </section>

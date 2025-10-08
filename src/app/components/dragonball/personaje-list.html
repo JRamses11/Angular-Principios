@@ -1,0 +1,19 @@
+<p>{{listName()}}</p>
+
+<h3>Listado</h3>
+        <ul class="list-group">
+            @for (personaje of personajes(); track personaje.id; let idx=$index) {
+
+                @if(personaje.poder >500){
+                     <li class="list-group-item d-flex justify-content-between">
+                     <span>{{idx + 1}} - {{personaje.nombre}}</span>
+                     <strong
+                     [class.text-danger]="personaje.poder>9000"
+                     [class.text-warning]="personaje.poder<=9000 && personaje.poder>=7000"
+                    >{{personaje.poder}}</strong>
+                </li>
+                } @else {
+                    <li class="list-group-item d-flex justify-content-between"><strong>Aqui no hay nada</strong></li>
+                }
+            }
+        </ul>
