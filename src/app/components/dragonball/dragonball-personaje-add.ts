@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component, signal, output } from "@angular/core";
 import { Personaje } from "../../interfaces/personaje.interface";
 
 @Component({
@@ -9,18 +9,20 @@ export class DragonballPersonajeAddComponent {
     nombre= signal('');
     poder= signal(0);
 
+    nuevoPersonaje= output<Personaje>();
+
     addPersonaje() {
         if((this.nombre() === '') || (this.poder() <= 0)){
             return;
         }
         
         const nuevoPersonaje: Personaje = {
-            id: 1000, // Temporal
+            id: Math.floor(Math.random()*1000), // Temporal
             nombre: this.nombre(),
             poder: this.poder(),
         };
         // this.personajes.update(personajes => [...personajes, nuevoPersonaje]);
-        console.log({nuevoPersonaje});
+        this.nuevoPersonaje.emit(nuevoPersonaje);
         this.Limpiar();
     }
 
